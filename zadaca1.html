@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zadaca</title>
+
+    <script>
+        function dodadi() {
+            var container = document.getElementById("container");
+            var div = document.createElement("div");
+            container.appendChild(div);
+
+            var input = document.createElement("input");
+            input.setAttribute("type", "number");
+            input.setAttribute("class", "pole");
+            div.appendChild(input);
+
+            var kopce = document.createElement("input");
+            kopce.setAttribute("type", "button");
+            kopce.setAttribute("onclick", "izbrisi(this)");
+            kopce.setAttribute("value", "Избриши");
+            div.appendChild(kopce);
+        }
+
+        function presmetaj() {
+            var vrednosti = document.getElementsByClassName("pole");
+            var niza = [];
+            var suma = 0;
+            var max = 0;
+            var min = 9999999;
+            for(var i=0; i<vrednosti.length; i++){
+                if (vrednosti[i].value != undefined){
+                    niza.push(parseInt(vrednosti[i].value));
+                    suma = suma + parseInt(vrednosti[i].value);
+                    if (max < parseInt(vrednosti[i].value)){
+                        max = parseInt(vrednosti[i].value);
+                    }
+                    if (min > parseInt(vrednosti[i].value)){
+                        min = parseInt(vrednosti[i].value);
+                    }
+                }
+
+            }
+
+            var prosek = suma / niza.length;
+            document.getElementById("prosek").innerHTML = prosek;
+            document.getElementById("minimum").innerHTML = min;
+            document.getElementById("maksimum").innerText = max;
+
+        }
+
+        function izbrisi(kopce) {
+            var div = kopce.parentNode;
+            div.parentNode.removeChild(div);
+        }
+
+    </script>
+
+</head>
+<body>
+
+<div id="container">
+    <div>
+    <input type="number" class="pole"/><button onclick="izbrisi(this)">Избриши</button>
+    </div>
+</div>
+<button onclick="dodadi()">Додади</button> <br/>
+<button onclick="presmetaj()">Пресметај</button> <br/>
+
+<label>Просек: </label>  <span id="prosek"></span>  <br/>
+<label>Максимум: </label>  <span id="maksimum"></span>  <br/>
+<label>Минимум: </label>  <span id="minimum"></span>  <br/>
+
+</body>
+</html>
